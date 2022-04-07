@@ -122,7 +122,6 @@ STATIC_URL = '/static/'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 STATICFILES_DIRS = [
     BASE_DIR / 'static',
-    '/var/www/static/',
 ]
 
 # Default primary key field type
