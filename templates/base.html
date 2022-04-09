@@ -19,10 +19,10 @@
 <body>
 
     <!-- Navbar -->
-    <div class="container">
 
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-            <div class="container-fluid">
+            <div class="container">
+
                 <a class="navbar-brand" href="{% url 'homepage' %}">
                     <img src="{% static 'img/apple-touch-icon.png' %}" width="30" height="30" class="d-inline-block align-top" alt="">
                     Web Portfolio
@@ -46,11 +46,11 @@
                         <a class="nav-item nav-link active" href="{% url 'account:signup' %}">Sign up</a>
                         {% endif %}
                     </div>
+
                 </div>
+
             </div>
         </nav>
-
-    </div>
 
     <!-- Page content -->
     <div class="container">
