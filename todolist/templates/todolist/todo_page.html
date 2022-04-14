@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'todolist/css/styles.css' %}">
+    <title>Todolist</title>
+</head>
+<body>
+
+    <div class="box" id="heading">
+        <h1>To-do list</h1>
+    </div>
+
+    <div class="box">
+
+        {% for item in items %}
+            <div class="item">
+                <input type="checkbox">
+                <p>{{item}}</p>
+            </div>
+        {% endfor %}      
+
+        <form class="item" action="{% url 'todolist:todo_page' %}" method="POST">
+            {% csrf_token %}
+            <input type="text" name="newitem" placeholder="New Item" autocomplete="off">
+            <button type="submit" name="button">+</button>
+        </form>
+
+    </div>
+
+</body>
+</html>
