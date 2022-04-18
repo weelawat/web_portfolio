@@ -4,15 +4,29 @@ from .models import *
 
 # Create your views here.
 def index(request):
-    context = {'todolist': Todolist.objects.all()}
+
+    if request.user.is_authenticated:
+        user = request.user
+        todolist = Todolist.objects.filter(user=user)
+    else:
+        todolist = Todolist.objects.filter(user=None)
+
+    context = {'todolist': todolist}
     return render(request, 'todolist/index.html', context)
 
 def insert(request):
-    todo = Todolist(content=request.POST['content'])
+
+    if request.user.is_authenticated:
+        user = request.user
+    else:
+        user = None
+    
+    todo = Todolist(content=request.POST['content'], user=user)
     todo.save()
     return redirect('/todolist/')
 
 def delete(request, todo_id):
+    
     todo = Todolist.objects.get(id=todo_id)
     todo.delete()
     return redirect('/todolist/')
