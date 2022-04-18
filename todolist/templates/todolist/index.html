@@ -16,16 +16,21 @@
 
     <div class="box">
 
-        {% for item in items %}
+        {% for todo in todolist %}
             <div class="item">
-                <input type="checkbox">
-                <p>{{item}}</p>
+
+                <form action="{% url 'todolist:delete' todo.id %}" method="POST" class="float-right d-inline">
+                    {% csrf_token %}
+                    <button type="submit">-</button>
+                </form>
+                <p>{{todo.content}}</p>
+                
             </div>
         {% endfor %}      
 
-        <form class="item" action="{% url 'todolist:todo_page' %}" method="POST">
+        <form class="item" action="{% url 'todolist:insert' %}" method="POST">
             {% csrf_token %}
-            <input type="text" name="newitem" placeholder="New Item" autocomplete="off">
+            <input type="text" name="content" placeholder="New Item" autocomplete="off">
             <button type="submit" name="button">+</button>
         </form>
 

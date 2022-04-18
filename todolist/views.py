@@ -1,19 +1,19 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views.generic import View
+from .models import *
 
 # Create your views here.
-class Todopage(View):
+def index(request):
+    context = {'todolist': Todolist.objects.all()}
+    return render(request, 'todolist/index.html', context)
 
-    items = ["Buy food", "Learn coding"]
+def insert(request):
+    todo = Todolist(content=request.POST['content'])
+    todo.save()
+    return redirect('/todolist/')
 
-    def get(self, request):
-        
-        return render(request, 'todolist/todo_page.html', {'items': self.items})
-
-    def post(self, request):
-
-        newitem = request.POST["newitem"]
-        self.items.append(newitem)
-        return render(request, 'todolist/todo_page.html', {'items': self.items})
-    
+def delete(request, todo_id):
+    todo = Todolist.objects.get(id=todo_id)
+    todo.delete()
+    return redirect('/todolist/')
     
